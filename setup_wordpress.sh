@@ -19,15 +19,16 @@ sudo apt install mariadb-server -y
 echo "MariaDB/MySQL install success!"
 
 # Securing the mysql installation
-# mysqlpw=""
-# echo "Secure MySQL server in progress"
-# sudo mysql_secure_installation 
-# echo $mysqlpw
-# echo n
-# echo y
-# echo y
-# echo y
-# echo y
+sudo mysqladmin -u root password password
+echo "Secure MySQL server in progress"
+sudo mysql_secure_installation <<EOF
+password
+n
+y
+y
+y
+y
+EOF
 
 # Install PHP7.4
 echo "Installing PHP7.4"
@@ -52,9 +53,14 @@ cd wordpress
 
 # Create DB for wordpress
 echo "Creating a Database for wordpress"
-sudo mysql -e "CREATE DATABASE $dbname default character set utf8 collate utf8_unicode_ci;"
-sudo mysql -e "GRANT ALL ON $dbname.* TO '$user'@'localhost' IDENTIFIED BY '$pass';"
-sudo mysql -e "FLUSH PRIVILEGES;"
+sudo mysql -u root -p
+echo password <<EOF
+CREATE DATABASE $dbname default character set utf8 collate utf8_unicode_ci;
+GRANT ALL ON $dbname.* TO '$user'@'localhost' IDENTIFIED BY '$pass';
+FLUSH PRIVILEGES;
+EOF
+
+
 
 # Copy and change wp-config
 sudo cp wp-config-sample.php wp-config.php
