@@ -1,13 +1,5 @@
 #!/bin/bash
 # Please do not remove this line. This command tells bash to stop executing on first error. 
-set -e
-rootpass="hitokiri"
-
-#Linux System 20.04 - pablo@Ubuntu [needs sudo]
-# Enter root 
-echo "Entering Root"
-sudo -s
-$rootpass
 
 # Installing nginx
 echo "="
@@ -53,10 +45,10 @@ echo "========E============================"
 echo "========================================"
 echo "============================================"
 mysql_secure_installation <<EOF
-""
-Set root password? y
-New Password: password
-Re-enter new password: password
+
+y
+password
+password
 y
 y
 y
