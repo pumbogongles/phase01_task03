@@ -31,7 +31,7 @@ mysql -e "CREATE DATABASE $dbname default character set utf8 collate utf8_unicod
 mysql -e "GRANT ALL ON $dbname.* to '$user'@'localhost' IDENTIFIED BY '$pass';"
 mysql -e "FLUSH PRIVILEGES;"
 
-cp wp-config-sample wp-config.php
+cp wp-config-sample.php wp-config.php
 
 sed -i "s/database_name_here/$dbname/g" wp-config.php
 sed -i "s/username_here/$user/g" wp-config.php
