@@ -29,7 +29,7 @@ dbname="db_wordpress"
 
 mysql -e "CREATE DATABASE $dbname default character set utf8 collate utf8_unicode_ci;"
 mysql -e "GRANT ALL ON $dbname.* to '$user'@'localhost' IDENTIFIED BY '$pass';"
-mysql -e "FLUSH PRIVILGES;"
+mysql -e "FLUSH PRIVILEGES;"
 
 cp wp-config-sample wp-config.php
 
