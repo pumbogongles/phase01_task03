@@ -1,1 +1,0 @@
-apt install nginx mariadb-server php7.4-fpm php7.4-mysql -y
