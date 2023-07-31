@@ -80,4 +80,13 @@ server {
 }
 EOF
 systemctl restart nginx
-echo "Please try going to localhost now"
+echo "Restarted Nginx"
+
+# Setting up Wordpress with account
+apt install curl
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+
+wp plugin install --activate
+wp core install --url=localhost --title=wp_test --admin_user=admin --admin_email=admin@admin.com --admin_password=!2three456. --path=/var/www/html/wordpress --skip-email --allow-root
