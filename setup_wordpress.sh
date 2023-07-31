@@ -44,14 +44,14 @@ cd wordpress
 # Create DB for wordpress
 echo "Creating a Database for wordpress"
 mysql -e "CREATE DATABASE $dbname default character set utf8 collate utf8_unicode_ci;"
-mysql -e "GRANT ALL ON $dbname.* to '$user'@'localhost' IDENTIFIED BY '$password';"
+mysql -e "GRANT ALL ON $dbname.* to '$user'@'localhost' IDENTIFIED BY '$pass';"
 mysql -e "FLUSH PRIVILEGES;"
 
 # Copy and change wp-config
 cp wp-config-sample.php wp-config.php
 sed -i "s/database_name_here/$dbname/g" wp-config.php
 sed -i "s/username_here/$user/g" wp-config.php
-sed -i "s/password_here/$password/g" wp-config.php
+sed -i "s/password_here/$pass/g" wp-config.php
 
 # Changing sites-available info
 cd /etc/nginx/sites-available
