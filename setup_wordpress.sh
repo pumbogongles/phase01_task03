@@ -92,7 +92,7 @@ chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
 cd /var/www/html/wordpress
-wp core install --url=localhost --title=wp_test --admin_user=admin --admin_email=admin@admin.com --admin_password=!2three456. --path=/var/www/html/wordpress --skip-email --allow-root
+wp core install --url=192.168.50.2 --title=wp_test --admin_user=admin --admin_email=admin@admin.com --admin_password=!2three456. --path=/var/www/html/wordpress --skip-email --allow-root
 wp theme install twentysixteen --activate --allow-root
 
 # Restart Nginx for good measures
