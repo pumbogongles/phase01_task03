@@ -98,4 +98,4 @@ wp theme install twentysixteen --activate --allow-root
 # Restart Nginx for good measures
 systemctl restart nginx
 
-echo "You may now try local host and be directed into WP
+echo "You may now try localhost and be directed into WP"
