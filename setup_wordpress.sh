@@ -13,7 +13,7 @@ apt update
 apt upgrade -y
 echo "OS update success!"
 
-# Install Nginx
+# Install Nginx, MariaDB and PHP
 echo "Installing NGINX, MariaDB, PHP"
 sudo apt install nginx mariadb-server php-fpm php-mysql -y
 echo "NGINX install success!"
@@ -41,19 +41,19 @@ wget https://wordpress.org/latest.tar.gz
 tar -xzvf latest.tar.gz
 cd wordpress
 
-# Create DB for wordpress
+# Create DB for wordpress without entering mysql via mysql -e
 echo "Creating a Database for wordpress"
 mysql -e "CREATE DATABASE $dbname default character set utf8 collate utf8_unicode_ci;"
 mysql -e "GRANT ALL ON $dbname.* to '$user'@'localhost' IDENTIFIED BY '$pass';"
 mysql -e "FLUSH PRIVILEGES;"
 
-# Copy and change wp-config
+# Copy and change wp-config's content using sed -i
 cp wp-config-sample.php wp-config.php
 sed -i "s/database_name_here/$dbname/g" wp-config.php
 sed -i "s/username_here/$user/g" wp-config.php
 sed -i "s/password_here/$pass/g" wp-config.php
 
-# Changing sites-available info
+# Changing sites-available info by writing a new default file via touch and then cat >
 cd /etc/nginx/sites-available
 touch default
 cat > default <<EOF
@@ -83,10 +83,19 @@ systemctl restart nginx
 echo "Restarted Nginx"
 
 # Setting up Wordpress with account
+# Installing curl to be able to read url
 apt install curl
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+# Add permission to make it executable
 chmod +x wp-cli.phar
+# Moving wp-cli.phar to a new directory /usr/local/bin/wp
 mv wp-cli.phar /usr/local/bin/wp
 
-wp plugin install --activate
+cd /var/html/www/wordpress
 wp core install --url=localhost --title=wp_test --admin_user=admin --admin_email=admin@admin.com --admin_password=!2three456. --path=/var/www/html/wordpress --skip-email --allow-root
+wp theme install twentysixteen --activate
+
+# Restart Nginx for good measures
+systemctl restart nginx
+
+echo "You may now try local host and be directed into WP
