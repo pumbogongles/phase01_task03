@@ -91,7 +91,7 @@ chmod +x wp-cli.phar
 # Moving wp-cli.phar to a new directory /usr/local/bin/wp
 mv wp-cli.phar /usr/local/bin/wp
 
-cd /var/html/www/wordpress
+cd /var/www/html/wordpress
 wp core install --url=localhost --title=wp_test --admin_user=admin --admin_email=admin@admin.com --admin_password=!2three456. --path=/var/www/html/wordpress --skip-email --allow-root
 wp theme install twentysixteen --activate
 
